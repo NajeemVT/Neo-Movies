@@ -1,9 +1,20 @@
 import Image from "next/image";
-import movies from "../assets";
 import { useEffect, useState } from "react";
+import { MovieType, fetchFeaturedMovies } from "@/utils/contentfulData";
+import { AiOutlineRight } from "react-icons/ai";
 
 const UpNextFeatured = ({ index }: { index: number }) => {
   const [imageIndexes, setImageIndexes] = useState<number[]>([]);
+  const [movies, setMovies] = useState<MovieType[]>([]);
+
+  useEffect(() => {
+    async function fetchMovies() {
+      const res = await fetchFeaturedMovies();
+      const movies = (await res?.map((p) => p.fields)) as MovieType[];
+      setMovies(movies);
+    }
+    fetchMovies();
+  }, [movies]);
 
   useEffect(() => {
     let firstIndex = index;
@@ -15,23 +26,31 @@ const UpNextFeatured = ({ index }: { index: number }) => {
   }, [index, imageIndexes]);
 
   return (
-    <div className="hidden h-[30rem] w-1/4 flex-col space-y-3 px-1 shadow-2xl md:flex">
+    <div className="hidden w-1/4 flex-grow flex-col space-y-3 px-1 shadow-2xl md:flex">
       <h3 className="text-2xl font-bold text-amber-400">Up Next</h3>
       {imageIndexes.map((imgIndex) => (
         <div
           key={imgIndex}
-          className="flex space-x-2 rounded-lg bg-brand-black p-1 px-2 shadow-2xl"
+          className="flex space-x-2 rounded-lg p-1 px-2 shadow-2xl"
         >
           <Image
-            src={movies[imgIndex].poster}
+            src={`https:${movies[imgIndex]?.posterImage.fields.file?.url}`}
             width={120}
             height={120}
             alt=""
-            className="aspect-square h-fit w-fit rounded-lg"
+            placeholder="blur"
+            blurDataURL="/"
+            unoptimized={true}
+            className="aspect-square  rounded-lg"
           />
-          <h3 className="text-lg font-semibold text-brand-white">
-            {movies[imgIndex].title}
-          </h3>
+          <div className="space-y-5">
+            <h3 className="truncate text-lg font-semibold text-brand-white">
+              {movies[imgIndex]?.title}
+            </h3>
+            <button className="mx-5 rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-brand-white hover:border-amber-400 hover:text-amber-400">
+              <AiOutlineRight />
+            </button>
+          </div>
         </div>
       ))}
     </div>
