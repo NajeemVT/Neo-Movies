@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import UpNextFeatured from "./UpNextFeatured";
 import { MovieType, fetchFeaturedMovies } from "@/utils/contentfulData";
 
@@ -19,11 +19,11 @@ const FeaturedMovies = () => {
     fetchMovies();
   }, [movies]);
 
-  const incrementIndex = () => {
+  const incrementIndex = useCallback(() => {
     clearInterval(slideShowId);
     setIndex((prevIndex) => (prevIndex == 2 ? 0 : ++prevIndex));
     slideShowId = setInterval(() => incrementIndex(), 2000);
-  };
+  }, []);
   const decrementIndex = () => {
     clearInterval(slideShowId);
     setIndex((prevIndex) => (prevIndex == 0 ? 2 : --prevIndex));
@@ -32,7 +32,7 @@ const FeaturedMovies = () => {
 
   useEffect(() => {
     slideShowId = setInterval(() => incrementIndex(), 4000);
-  }, []);
+  }, [incrementIndex]);
 
   return (
     <div className="flex w-full space-x-2">
@@ -50,13 +50,13 @@ const FeaturedMovies = () => {
         <div className="absolute bottom-1/2 z-50 w-full">
           <div className="mx-5 flex items-center justify-between text-brand-white">
             <button
-              className="rounded-md border-2 border-inherit text-4xl font-bold backdrop-blur-lg hover:border-amber-400 hover:text-amber-400"
+              className="rounded-md border-2 border-inherit text-4xl font-bold backdrop-blur-lg hover:border-amber-400 hover:text-brand-action"
               onClick={decrementIndex}
             >
               <AiOutlineLeft />
             </button>
             <button
-              className="rounded-md border-2 border-inherit text-4xl font-bold backdrop-blur-lg hover:border-amber-400 hover:text-amber-400"
+              className="rounded-md border-2 border-inherit text-4xl font-bold backdrop-blur-lg hover:border-amber-400 hover:text-brand-action"
               onClick={incrementIndex}
             >
               <AiOutlineRight />
@@ -67,7 +67,7 @@ const FeaturedMovies = () => {
           <h2 className="text-center text-xl font-bold text-brand-white md:text-right md:text-4xl">
             {movies[index]?.title}
           </h2>
-          <button className="rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-white hover:border-amber-400 hover:text-amber-400">
+          <button className="rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-white hover:border-amber-400 hover:text-brand-action">
             <AiOutlineRight />
           </button>
         </div>

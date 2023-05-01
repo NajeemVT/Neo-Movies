@@ -1,0 +1,74 @@
+import Image from "next/image";
+import { AiFillStar, AiOutlineRight } from "react-icons/ai";
+import { fetchMovieDetails } from "@/utils/contentfulData";
+import { MovieType } from "@/utils/contentfulData";
+import Link from "next/link";
+
+async function fetchMovie(movieId: string) {
+  const res = await fetchMovieDetails(movieId);
+  const movies = (await res?.map((p) => p.fields)) as MovieType[];
+  return movies[0];
+}
+
+const MovieDetails = async ({
+  params: { movieId },
+}: {
+  params: { movieId: string };
+}) => {
+  const movie = (await fetchMovie(movieId)) as MovieType;
+  return (
+    <div className="flex flex-col space-y-5 p-5">
+      <div className="flex h-10 items-center justify-between space-x-2 font-bold text-brand-white">
+        <h1 className="text-4xl">{movie.title}</h1>
+        <section className="flex flex-col items-center justify-center space-y-2 text-brand-white">
+          <h3 className="text-xl">RATING</h3>
+          <p className="flex items-center space-x-2 text-xl">
+            <AiFillStar className="text-brand-action" />
+            <span>{movie.imdbRating}/10</span>
+          </p>
+        </section>
+      </div>
+
+      <div className="flex h-full w-full flex-col justify-between">
+        <div className="flex space-x-5">
+          <Image
+            src={`https:${movie.posterImage.fields.file?.url}`}
+            width={1000}
+            height={1000}
+            placeholder="blur"
+            blurDataURL="/"
+            unoptimized={true}
+            alt=""
+            className="aspect-video h-2/5 w-1/2"
+          />
+          <div className="flex w-1/2 flex-col space-y-5 py-5 text-brand-white">
+            <section className="flex space-x-5 border-y p-5">
+              <h4 className="font-bold">Director</h4>
+              <p>{movie.director}</p>
+            </section>
+            <section className="flex space-x-5 border-y p-5">
+              <h4 className="font-bold">Writers</h4>
+              <p>{movie.writers.join(", ")}</p>
+            </section>
+            <section className="flex space-x-5 border-y p-5">
+              <h4 className="font-bold">Stars</h4>
+              <p>{movie.cast.join(", ")}</p>
+            </section>
+            <a href={movie.streamingUrl}>
+              <button className="w-full rounded-md bg-brand-action px-2 py-4 text-brand-white">
+                Watch Online
+              </button>
+            </a>
+          </div>
+        </div>
+
+        <article className="flex flex-col space-y-5 text-brand-white">
+          <h3 className="text-xl font-bold">Summary</h3>
+          <p className="w-1/2 text-justify">{movie.description}</p>
+        </article>
+      </div>
+    </div>
+  );
+};
+
+export default MovieDetails;

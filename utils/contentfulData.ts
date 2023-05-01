@@ -12,7 +12,7 @@ export type MovieType = {
   id: EntryFields.Integer;
   title: EntryFields.Text;
   posterImage: Asset;
-  description: EntryFields.RichText;
+  description: EntryFields.Text;
   director: EntryFields.Text;
   writers: EntryFields.Text[];
   cast: EntryFields.Text[];
@@ -82,5 +82,6 @@ export async function fetchMovieDetails(id: string) {
     content_type: "neoMovies",
     "fields.id": id,
   });
-  return entries.items[0];
+  if (entries.items) return entries.items;
+  console.log(`Error getting movie details`);
 }

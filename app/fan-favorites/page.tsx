@@ -1,25 +1,23 @@
+import React from "react";
 import Image from "next/image";
-import { AiOutlineRight } from "react-icons/ai";
-import { fetchTopFiveMovies } from "@/utils/contentfulData";
+import { fetchFanFavoriteMovies } from "@/utils/contentfulData";
 import { MovieType } from "@/utils/contentfulData";
-import Link from "next/link";
 
 async function fetchMovies() {
-  const res = await fetchTopFiveMovies();
+  const res = await fetchFanFavoriteMovies();
   const movies = await res?.map((p) => p.fields);
   return movies;
 }
 
-const TopFiveMovies = async () => {
+const FanFavorites = async () => {
   const movies = (await fetchMovies()) as MovieType[];
   return (
-    <div className="flex flex-col space-y-5 px-2">
+    <div className="m-1 flex flex-col space-y-2 p-5 md:space-y-5">
       <div className="flex h-10 items-center space-x-2 font-bold text-brand-white">
         <div className="h-full w-1 bg-brand-action"></div>
-        <h1 className="text-3xl">Top Five</h1>
+        <h1 className="text-3xl">Fan Favorites</h1>
       </div>
-
-      <div className="flex h-80 w-full justify-between overflow-auto whitespace-nowrap scrollbar-hide">
+      <div className="grid grid-cols-5">
         {movies.map((movie: MovieType) => (
           <div
             key={movie.id}
@@ -38,11 +36,9 @@ const TopFiveMovies = async () => {
             <h1 className="truncate text-xl font-semibold text-brand-white">
               {movie.title}
             </h1>
-            <Link href={`http://localhost:3000/movie/${movie.id}`}>
-              <button className="w-full bg-brand-action p-2 text-brand-white">
-                Explore
-              </button>
-            </Link>
+            <button className="w-full bg-brand-action p-2 text-brand-white">
+              Explore
+            </button>
           </div>
         ))}
       </div>
@@ -50,4 +46,4 @@ const TopFiveMovies = async () => {
   );
 };
 
-export default TopFiveMovies;
+export default FanFavorites;

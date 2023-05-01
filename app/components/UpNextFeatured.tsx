@@ -23,15 +23,15 @@ const UpNextFeatured = ({ index }: { index: number }) => {
 
     const updatedIndexes = [secondIndex, thirdIndex, firstIndex];
     setImageIndexes(updatedIndexes);
-  }, [index, imageIndexes]);
+  }, [index]);
 
   return (
-    <div className="hidden w-1/4 flex-grow flex-col space-y-3 px-1 shadow-2xl md:flex">
-      <h3 className="text-2xl font-bold text-amber-400">Up Next</h3>
+    <div className="hidden w-1/4 flex-grow flex-col space-y-3 px-1 md:flex">
+      <h3 className="text-2xl font-bold text-brand-action">Up Next</h3>
       {imageIndexes.map((imgIndex) => (
         <div
           key={imgIndex}
-          className="flex space-x-2 rounded-lg p-1 px-2 shadow-2xl"
+          className="flex space-x-2 rounded-lg bg-brand-secondary p-2 shadow-2xl"
         >
           <Image
             src={`https:${movies[imgIndex]?.posterImage.fields.file?.url}`}
@@ -47,7 +47,7 @@ const UpNextFeatured = ({ index }: { index: number }) => {
             <h3 className="truncate text-lg font-semibold text-brand-white">
               {movies[imgIndex]?.title}
             </h3>
-            <button className="mx-5 rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-brand-white hover:border-amber-400 hover:text-amber-400">
+            <button className="mx-5 rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-brand-white hover:border-amber-400 hover:text-brand-action">
               <AiOutlineRight />
             </button>
           </div>

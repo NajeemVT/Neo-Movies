@@ -8,9 +8,9 @@ import {
 } from "react-icons/ai";
 const Footer = () => {
   return (
-    <footer className="flex h-80 flex-col items-center justify-around border-t-2 border-brand-black bg-brand-primary text-brand-white shadow-2xl md:flex-row md:px-14">
+    <footer className="flex h-80 flex-col items-center justify-around border-t-2 border-brand-secondary bg-brand-primary text-brand-white shadow-2xl md:flex-row md:px-14">
       <div className="flex flex-col items-center space-y-7">
-        <h1 className="text-3xl font-bold text-amber-400">Neo Movies</h1>
+        <h1 className="text-3xl font-bold text-brand-action">Neo Movies</h1>
         <ul className="flex space-x-5 text-sm md:text-lg">
           <li>Terms & Conditions</li>
           <li>Privacy Policy</li>
