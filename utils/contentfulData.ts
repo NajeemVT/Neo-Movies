@@ -30,6 +30,7 @@ const client = createClient({
 export async function fetchTopFiveMovies<MovieType>() {
   const entries = await client.getEntries({
     content_type: "neoMovies",
+    limit: 5,
     "fields.tags[in]": "top5",
   });
   if (entries.items) return entries.items;
@@ -44,7 +45,7 @@ export async function fetchFeaturedMovies<MovieType>() {
     limit: 3,
   });
   if (entries.items) return entries.items;
-  console.log(`Error getting Featured Movies`);
+  console.log(`Error getting featured movies`);
 }
 
 // Fetch Featured Movies
@@ -54,7 +55,7 @@ export async function fetchFanFavoriteMovies<MovieType>() {
     "fields.tags[in]": "fan-favorite",
   });
   if (entries.items) return entries.items;
-  console.log(`Error getting FanFavorite Movies`);
+  console.log(`Error getting fan favorite movies`);
 }
 
 // Fetch Movie of the Day
@@ -84,4 +85,25 @@ export async function fetchMovieDetails(id: string) {
   });
   if (entries.items) return entries.items;
   console.log(`Error getting movie details`);
+}
+
+// Fetch Top 5 Random Movies
+export async function fetchRandomMovies<MovieType>() {
+  const entries = await client.getEntries({
+    content_type: "neoMovies",
+    limit: 5,
+  });
+  if (entries.items) return entries.items;
+  console.log(`Error getting random movies`);
+}
+
+// Search movie by name
+export async function searchMovieByName(title: string) {
+  const entries = await client.getEntries({
+    content_type: "neoMovies",
+    "fields.title[match]": title,
+    limit: 5,
+  });
+  if (entries.items) return entries.items;
+  console.log(`Error in searching movie by name`);
 }

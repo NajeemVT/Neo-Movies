@@ -1,6 +1,5 @@
 import { use } from "react";
 import FeaturedMovies from "./components/FeaturedMovies";
-import Footer from "./components/Footer";
 import MovieOfTheDay from "./components/MovieOfTheDay";
 import TopFiveMovies from "./components/TopFiveMovies";
 import FanFavoriteMovies from "./components/FanFavoriteMovies";
@@ -13,13 +12,12 @@ export default function Home() {
   const movieCollection = use(MovieCollection());
 
   return (
-    <div className="m-1 flex flex-col space-y-2 md:space-y-5">
+    <div className="m-1 flex flex-col space-y-2 pb-40 md:space-y-8">
       {movieOfTheDay}
       <FeaturedMovies />
       {topFiveMovies}
       {fanFavoriteMovies}
       {movieCollection}
-      <Footer />
     </div>
   );
 }

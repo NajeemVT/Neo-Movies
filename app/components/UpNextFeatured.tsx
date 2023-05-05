@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { MovieType, fetchFeaturedMovies } from "@/utils/contentfulData";
-import { AiOutlineRight } from "react-icons/ai";
+import { AiFillStar, AiOutlineRight } from "react-icons/ai";
+import Link from "next/link";
 
 const UpNextFeatured = ({ index }: { index: number }) => {
   const [imageIndexes, setImageIndexes] = useState<number[]>([]);
@@ -43,13 +44,19 @@ const UpNextFeatured = ({ index }: { index: number }) => {
             unoptimized={true}
             className="aspect-square  rounded-lg"
           />
-          <div className="space-y-5">
-            <h3 className="truncate text-lg font-semibold text-brand-white">
+          <div className=" flex flex-col justify-center space-y-2 text-brand-white">
+            <h3 className="truncate text-lg font-semibold ">
               {movies[imgIndex]?.title}
             </h3>
-            <button className="mx-5 rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-brand-white hover:border-amber-400 hover:text-brand-action">
-              <AiOutlineRight />
-            </button>
+            <p className="flex items-center space-x-2 text-xl">
+              <AiFillStar className="text-brand-action" />
+              <span>{movies[imgIndex]?.imdbRating}/10</span>
+            </p>
+            <Link href={`http://localhost:3000/movie/${movies[imgIndex]?.id}`}>
+              <button className="ml-5 rounded-full border-2 border-inherit bg-inherit align-middle text-4xl font-bold text-white hover:border-amber-400 hover:text-brand-action">
+                <AiOutlineRight />
+              </button>
+            </Link>
           </div>
         </div>
       ))}

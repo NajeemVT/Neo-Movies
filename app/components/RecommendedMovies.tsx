@@ -1,32 +1,34 @@
+"use client";
 import Image from "next/image";
-import { AiOutlineRight } from "react-icons/ai";
-import { fetchFanFavoriteMovies } from "@/utils/contentfulData";
+import { fetchRandomMovies } from "@/utils/contentfulData";
 import { MovieType } from "@/utils/contentfulData";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-async function fetchMovies() {
-  const res = await fetchFanFavoriteMovies();
-  const movies = await res?.map((p) => p.fields);
-  return movies;
-}
+const RecommendedMovies = () => {
+  const [movies, setMovies] = useState<MovieType[]>([]);
 
-const FanFavoriteMovies = async () => {
-  const movies = (await fetchMovies()) as MovieType[];
+  useEffect(() => {
+    async function fetchMovies() {
+      const res = await fetchRandomMovies();
+      const movies = (await res?.map((p) => p.fields)) as MovieType[];
+      setMovies(movies);
+    }
+    fetchMovies();
+  }, [movies]);
+
   return (
-    <div className="flex flex-col space-y-5 px-2">
+    <div className="flex flex-col space-y-5 md:px-2">
       <div className="flex h-10 items-center space-x-2 font-bold text-brand-white">
         <div className="h-full w-1 bg-brand-action"></div>
-        <h1 className="text-3xl">Fan Favorites</h1>
-        <Link href="/fan-favorites">
-          <AiOutlineRight className="mt-2 text-3xl hover:text-brand-action" />
-        </Link>
+        <h1 className="text-2xl md:text-3xl">Recommended Movies</h1>
       </div>
 
       <div className="flex h-80 w-full justify-between overflow-auto whitespace-nowrap scrollbar-hide">
-        {movies.slice(0, 5).map((movie: MovieType) => (
+        {movies.map((movie: MovieType) => (
           <div
             key={movie.id}
-            className="flex h-full min-w-fit flex-col space-y-3 rounded-lg  bg-brand-secondary p-1 shadow-2xl md:p-2"
+            className="flex h-full min-w-fit flex-col space-y-3 rounded-lg bg-brand-secondary p-1 shadow-2xl md:p-2"
           >
             <Image
               src={`https:${movie.posterImage.fields.file?.url}`}
@@ -53,4 +55,4 @@ const FanFavoriteMovies = async () => {
   );
 };
 
-export default FanFavoriteMovies;
+export default RecommendedMovies;

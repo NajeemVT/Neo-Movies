@@ -4,6 +4,7 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useCallback, useEffect, useState } from "react";
 import UpNextFeatured from "./UpNextFeatured";
 import { MovieType, fetchFeaturedMovies } from "@/utils/contentfulData";
+import Link from "next/link";
 
 let slideShowId: NodeJS.Timer;
 const FeaturedMovies = () => {
@@ -47,7 +48,7 @@ const FeaturedMovies = () => {
           unoptimized={true}
           className="aspect-square h-full w-full rounded-lg"
         />
-        <div className="absolute bottom-1/2 z-50 w-full">
+        <div className="absolute bottom-1/2 z-30 w-full">
           <div className="mx-5 flex items-center justify-between text-brand-white">
             <button
               className="rounded-md border-2 border-inherit text-4xl font-bold backdrop-blur-lg hover:border-amber-400 hover:text-brand-action"
@@ -63,13 +64,15 @@ const FeaturedMovies = () => {
             </button>
           </div>
         </div>
-        <div className="absolute bottom-0 flex h-10 w-full items-center justify-end space-x-5 rounded-b-lg py-2 backdrop-blur-2xl backdrop-brightness-50 md:h-20 md:px-10 md:py-5">
+        <div className="absolute bottom-0 flex h-20 w-full items-center justify-end space-x-5 rounded-b-lg py-2 backdrop-blur-2xl backdrop-brightness-50 md:px-10 md:py-5">
           <h2 className="text-center text-xl font-bold text-brand-white md:text-right md:text-4xl">
             {movies[index]?.title}
           </h2>
-          <button className="rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-white hover:border-amber-400 hover:text-brand-action">
-            <AiOutlineRight />
-          </button>
+          <Link href={`http://localhost:3000/movie/${movies[index]?.id}`}>
+            <button className="rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-white hover:border-amber-400 hover:text-brand-action">
+              <AiOutlineRight />
+            </button>
+          </Link>
         </div>
       </div>
       <UpNextFeatured index={index} />

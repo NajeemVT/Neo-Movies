@@ -19,11 +19,11 @@ const TopFiveMovies = async () => {
         <h1 className="text-3xl">Top Five</h1>
       </div>
 
-      <div className="flex h-80 w-full justify-between overflow-auto whitespace-nowrap scrollbar-hide">
+      <div className="flex h-80 justify-between overflow-auto whitespace-nowrap scrollbar-hide">
         {movies.map((movie: MovieType) => (
           <div
             key={movie.id}
-            className="flex h-full w-60 flex-col space-y-3 rounded-lg bg-brand-secondary p-1 shadow-2xl md:p-2"
+            className="flex h-full min-w-fit flex-col space-y-3 rounded-lg bg-brand-secondary p-1 shadow-2xl md:p-2"
           >
             <Image
               src={`https:${movie.posterImage.fields.file?.url}`}
