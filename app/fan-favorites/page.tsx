@@ -12,7 +12,7 @@ async function fetchMovies() {
 
 const FanFavorites = async () => {
   const movies = (await fetchMovies()) as MovieType[];
-  if(movies.length === 0 ) return <Error/>
+  if (movies.length === 0) return <Error />;
   return (
     <div className="m-1 flex flex-col space-y-2 p-5 md:space-y-5">
       <div className="flex h-10 items-center space-x-2 font-bold text-brand-white">
