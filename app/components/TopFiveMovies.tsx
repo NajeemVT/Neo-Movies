@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { AiOutlineRight } from "react-icons/ai";
-import { fetchTopFiveMovies } from "@/utils/contentfulData";
-import { MovieType } from "@/utils/contentfulData";
+import { MovieType } from "@/utils/contentfulClient";
 import Link from "next/link";
 
 async function fetchMovies() {
-  const res = await fetchTopFiveMovies();
-  const movies = await res?.map((p) => p.fields);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=top5`
+  );
+  const movies = (await response.json()).map((p: any) => p.fields);
   return movies;
 }
 
@@ -38,7 +39,9 @@ const TopFiveMovies = async () => {
             <h1 className="truncate text-xl font-semibold text-brand-white">
               {movie.title}
             </h1>
-            <Link href={`http://localhost:3000/movie/${movie.id}`}>
+            <Link
+              href={`${process.env.NEXT_PUBLIC_HOST_DOMAIN}/movie/${movie.id}`}
+            >
               <button className="w-full bg-brand-action p-2 text-brand-white">
                 Explore
               </button>

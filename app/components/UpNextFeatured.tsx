@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { MovieType, fetchFeaturedMovies } from "@/utils/contentfulData";
+import { MovieType } from "@/utils/contentfulClient";
 import { AiFillStar, AiOutlineRight } from "react-icons/ai";
 import Link from "next/link";
 
@@ -10,8 +10,10 @@ const UpNextFeatured = ({ index }: { index: number }) => {
 
   useEffect(() => {
     async function fetchMovies() {
-      const res = await fetchFeaturedMovies();
-      const movies = (await res?.map((p) => p.fields)) as MovieType[];
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=featured`
+      );
+      const movies = (await response.json()).map((p: any) => p.fields);
       setMovies(movies);
     }
     fetchMovies();
@@ -52,7 +54,9 @@ const UpNextFeatured = ({ index }: { index: number }) => {
               <AiFillStar className="text-brand-action" />
               <span>{movies[imgIndex]?.imdbRating}/10</span>
             </p>
-            <Link href={`http://localhost:3000/movie/${movies[imgIndex]?.id}`}>
+            <Link
+              href={`${process.env.NEXT_PUBLIC_HOST_DOMAIN}/movie/${movies[imgIndex]?.id}`}
+            >
               <button className="ml-5 rounded-full border-2 border-inherit bg-inherit align-middle text-4xl font-bold text-white hover:border-amber-400 hover:text-brand-action">
                 <AiOutlineRight />
               </button>

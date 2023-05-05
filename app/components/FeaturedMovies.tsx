@@ -3,8 +3,8 @@ import Image from "next/image";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { useCallback, useEffect, useState } from "react";
 import UpNextFeatured from "./UpNextFeatured";
-import { MovieType, fetchFeaturedMovies } from "@/utils/contentfulData";
 import Link from "next/link";
+import { MovieType } from "@/utils/contentfulClient";
 
 let slideShowId: NodeJS.Timer;
 const FeaturedMovies = () => {
@@ -13,8 +13,10 @@ const FeaturedMovies = () => {
 
   useEffect(() => {
     async function fetchMovies() {
-      const res = await fetchFeaturedMovies();
-      const movies = (await res?.map((p) => p.fields)) as MovieType[];
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=featured`
+      );
+      const movies = (await response.json()).map((p: any) => p.fields);
       setMovies(movies);
     }
     fetchMovies();
@@ -68,7 +70,9 @@ const FeaturedMovies = () => {
           <h2 className="text-center text-xl font-bold text-brand-white md:text-right md:text-4xl">
             {movies[index]?.title}
           </h2>
-          <Link href={`http://localhost:3000/movie/${movies[index]?.id}`}>
+          <Link
+            href={`${process.env.NEXT_PUBLIC_HOST_DOMAIN}/movie/${movies[index]?.id}`}
+          >
             <button className="rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-white hover:border-amber-400 hover:text-brand-action">
               <AiOutlineRight />
             </button>

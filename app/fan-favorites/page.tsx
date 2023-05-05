@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
-import { fetchFanFavoriteMovies } from "@/utils/contentfulData";
-import { MovieType } from "@/utils/contentfulData";
+import { MovieType } from "@/utils/contentfulClient";
 import Error from "../components/Error";
 
 async function fetchMovies() {
-  const res = await fetchFanFavoriteMovies();
-  const movies = await res?.map((p) => p.fields);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=fan-favorite`
+  );
+  const movies = (await response.json()).map((p: any) => p.fields);
   return movies;
 }
 

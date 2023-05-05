@@ -1,9 +1,11 @@
 import Image from "next/image";
-import { MovieType, fetchMovieOfTheDay } from "@/utils/contentfulData";
+import { MovieType } from "@/utils/contentfulClient";
 
 async function fetchMovies() {
-  const res = await fetchMovieOfTheDay();
-  const movies = await res?.map((p) => p.fields);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=movie-of-the-day`
+  );
+  const movies = (await response.json()).map((p: any) => p.fields);
   return movies;
 }
 

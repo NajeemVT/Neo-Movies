@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
-import { fetchRandomMovies } from "@/utils/contentfulData";
-import { MovieType } from "@/utils/contentfulData";
+import { MovieType } from "@/utils/contentfulClient";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -10,8 +9,10 @@ const RecommendedMovies = () => {
 
   useEffect(() => {
     async function fetchMovies() {
-      const res = await fetchRandomMovies();
-      const movies = (await res?.map((p) => p.fields)) as MovieType[];
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=recommended`
+      );
+      const movies = (await response.json()).map((p: any) => p.fields);
       setMovies(movies);
     }
     fetchMovies();
@@ -43,7 +44,9 @@ const RecommendedMovies = () => {
             <h1 className="truncate text-xl font-semibold text-brand-white">
               {movie.title}
             </h1>
-            <Link href={`http://localhost:3000/movie/${movie.id}`}>
+            <Link
+              href={`${process.env.NEXT_PUBLIC_HOST_DOMAIN}/movie/${movie.id}`}
+            >
               <button className="w-full bg-brand-action p-2 text-brand-white">
                 Explore
               </button>

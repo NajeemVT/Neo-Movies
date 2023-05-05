@@ -1,12 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import { fetchAllMovies } from "@/utils/contentfulData";
-import { MovieType } from "@/utils/contentfulData";
 import Error from "../components/Error";
+import { MovieType } from "@/utils/contentfulClient";
 
 async function fetchMovies() {
-  const res = await fetchAllMovies();
-  const movies = await res?.map((p) => p.fields);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies`);
+  const movies = (await response.json()).map((p: any) => p.fields);
   return movies;
 }
 

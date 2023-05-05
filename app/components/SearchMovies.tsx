@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { MovieType, searchMovieByName } from "@/utils/contentfulData";
+import { MovieType } from "@/utils/contentfulClient";
 import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -13,8 +13,10 @@ const SearchMovies = () => {
 
   useEffect(() => {
     async function fetchMoviesList(searchText: string) {
-      const res = await searchMovieByName(searchText.trim());
-      const movies = (await res?.map((p) => p.fields)) as MovieType[];
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search/${searchText}`
+      );
+      const movies = (await response.json()).map((p: any) => p.fields);
       setMovies(movies);
     }
 
