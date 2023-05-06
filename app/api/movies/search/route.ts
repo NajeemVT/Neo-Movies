@@ -14,7 +14,6 @@ export async function GET(req: Request) {
   } else {
     entries = await client.getEntries({
       content_type: "neoMovies",
-      limit: 5,
       "fields.tags[in]": tag,
     });
   }

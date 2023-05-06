@@ -17,7 +17,7 @@ const FeaturedMovies = () => {
         `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=featured`
       );
       const movies = (await response.json()).map((p: any) => p.fields);
-      setMovies(movies);
+      setMovies(movies.slice(0, 3));
     }
     fetchMovies();
   }, [movies]);

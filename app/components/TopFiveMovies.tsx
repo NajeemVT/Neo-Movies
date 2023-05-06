@@ -21,7 +21,7 @@ const TopFiveMovies = async () => {
       </div>
 
       <div className="flex h-80 justify-between overflow-auto whitespace-nowrap scrollbar-hide">
-        {movies.map((movie: MovieType) => (
+        {movies.slice(0, 5).map((movie: MovieType) => (
           <div
             key={movie.id}
             className="flex h-full min-w-fit flex-col space-y-3 rounded-lg bg-brand-secondary p-1 shadow-2xl md:p-2"
