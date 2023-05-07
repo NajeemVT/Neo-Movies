@@ -30,4 +30,17 @@ const MovieOfTheDay = async () => {
   }
 };
 
+// async function getServerSideProps() {
+//   const response = await fetch(
+//     `${process.env.HOST_DOMAIN}/api/movies/search?tag=movie-of-the-day`
+//   );
+//   const results = await response.json();
+//   const movies = results.length > 0 ? results.map((p: any) => p.fields) : [];
+//   return {
+//     props: {
+//       movies: movies,
+//     },
+//   };
+// }
+
 export default MovieOfTheDay;
