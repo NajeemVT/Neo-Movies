@@ -5,13 +5,12 @@ import { MovieType } from "@/utils/contentfulClient";
 import Link from "next/link";
 
 async function fetchMovies() {
-  // const response = await fetch(
-  //   `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies`
-  // );
-  // const results = await response.json();
-  // const movies = results?.length > 0 ? results?.map((p: any) => p.fields) : [];
-  // return movies;
-  return [];
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies`
+  );
+  const results = await response.json();
+  const movies = results?.length > 0 ? results?.map((p: any) => p.fields) : [];
+  return movies;
 }
 
 const AllMovies = async () => {
