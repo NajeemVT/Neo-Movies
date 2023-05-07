@@ -21,7 +21,6 @@ const MovieDetails = async ({
 
   const movie = (await fetchMovie(movieId)) as MovieType;
   if (!movie) return <Error />;
-
   return (
     <div className="flex flex-col space-y-10 px-5 py-10 md:space-y-5">
       <div className="flex h-10 flex-col items-start justify-between font-bold text-brand-white md:flex-row md:items-center md:space-x-2">
@@ -47,7 +46,7 @@ const MovieDetails = async ({
             alt=""
             className="aspect-video h-2/5 w-fit md:w-1/2"
           />
-          <div className="flex w-fit flex-col space-y-5 py-5 text-brand-white md:w-1/2">
+          <div className="flex w-full flex-col space-y-5 py-5 text-brand-white md:w-1/2">
             <section className="flex space-x-5 border-y px-2 py-5 md:p-5">
               <h4 className="font-bold">Director</h4>
               <p>{movie.director}</p>

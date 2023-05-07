@@ -24,7 +24,7 @@ const TopFiveMovies = async () => {
         {movies.slice(0, 5).map((movie: MovieType) => (
           <div
             key={movie.id}
-            className="flex h-full min-w-fit flex-col space-y-3 rounded-lg bg-brand-secondary p-1 shadow-2xl md:p-2"
+            className="flex h-full min-w-fit max-w-sm flex-col space-y-3 rounded-lg bg-brand-secondary p-1 shadow-2xl md:p-2"
           >
             <Image
               src={`https:${movie.posterImage.fields.file?.url}`}
