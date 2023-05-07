@@ -6,10 +6,10 @@ import Link from "next/link";
 
 async function fetchMovies() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=fan-favorite`
+    `${process.env.HOST_DOMAIN}/api/movies/search?tag=fan-favorite`
   );
   const results = await response.json();
-  const movies = results?.length > 0 ? results?.map((p: any) => p.fields) : [];
+  const movies = results.length > 0 ? results.map((p: any) => p.fields) : [];
   return movies;
 }
 
