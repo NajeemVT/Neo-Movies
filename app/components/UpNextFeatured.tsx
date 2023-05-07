@@ -48,7 +48,7 @@ const UpNextFeatured = ({
               <span>{movies[imgIndex]?.imdbRating}/10</span>
             </p>
             <Link
-              href={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/movie/${movies[imgIndex]?.id}`}
+              href={`${process.env.HOST_DOMAIN}/movie/${movies[imgIndex]?.id}`}
             >
               <button className="ml-5 rounded-full border-2 border-inherit bg-inherit align-middle text-4xl font-bold text-white hover:border-amber-400 hover:text-brand-action">
                 <AiOutlineRight />

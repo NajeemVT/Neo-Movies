@@ -15,7 +15,7 @@ const FeaturedMovies = () => {
   useEffect(() => {
     async function fetchMovies() {
       const response = await fetch(
-        `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies/search?tag=featured`
+        `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=featured`
       );
       const movies = (await response.json()).map((p: any) => p.fields);
       setMovies(movies.slice(0, 3));
@@ -70,9 +70,7 @@ const FeaturedMovies = () => {
           <h2 className="text-center text-xl font-bold text-brand-white md:text-right md:text-4xl">
             {movies[index]?.title}
           </h2>
-          <Link
-            href={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/movie/${movies[index]?.id}`}
-          >
+          <Link href={`${process.env.HOST_DOMAIN}/movie/${movies[index]?.id}`}>
             <button className="rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-white hover:border-amber-400 hover:text-brand-action">
               <AiOutlineRight />
             </button>

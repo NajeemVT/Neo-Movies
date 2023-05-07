@@ -3,7 +3,7 @@ import { MovieType } from "@/utils/contentfulClient";
 
 async function fetchMovies() {
   const response = await fetch(
-    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies/search?tag=movie-of-the-day`
+    `${process.env.HOST_DOMAIN}/api/movies/search?tag=movie-of-the-day`
   );
   const results = await response.json();
   const movies = results.length > 0 ? results.map((p: any) => p.fields) : [];
@@ -32,7 +32,7 @@ const MovieOfTheDay = async () => {
 
 // async function getServerSideProps() {
 //   const response = await fetch(
-//     `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies/search?tag=movie-of-the-day`
+//     `${process.env.HOST_DOMAIN}/api/movies/search?tag=movie-of-the-day`
 //   );
 //   const results = await response.json();
 //   const movies = results.length > 0 ? results.map((p: any) => p.fields) : [];
