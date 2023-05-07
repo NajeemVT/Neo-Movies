@@ -2,13 +2,12 @@ import Image from "next/image";
 import { MovieType } from "@/utils/contentfulClient";
 
 async function fetchMovies() {
-  // const response = await fetch(
-  //   `${process.env.HOST_DOMAIN}/api/movies/search?tag=movie-of-the-day`
-  // );
-  // const results = await response.json();
-  // const movies = results.length > 0 ? results.map((p: any) => p.fields) : [];
-  // return movies;
-  return [];
+  const response = await fetch(
+    `${process.env.HOST_DOMAIN}/api/movies/search?tag=movie-of-the-day`
+  );
+  const results = await response.json();
+  const movies = results.length > 0 ? results.map((p: any) => p.fields) : [];
+  return movies;
 }
 
 const MovieOfTheDay = async () => {
