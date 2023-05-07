@@ -4,7 +4,9 @@ import { MovieType } from "@/utils/contentfulClient";
 import Link from "next/link";
 
 async function fetchMovies() {
-  const response = await fetch(`${process.env.HOST_DOMAIN}/api/movies`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies`
+  );
   const movies = (await response.json()).map((p: any) => p.fields);
   return movies;
 }
@@ -41,7 +43,7 @@ const MovieCollection = async () => {
                   {movie.title}
                 </h1>
                 <Link
-                  href={`${process.env.NEXT_PUBLIC_HOST_DOMAIN}/movie/${movie.id}`}
+                  href={`${process.env.NEXT_PUBLIC_VERCEL_URL}/movie/${movie.id}`}
                 >
                   <button className="w-full bg-brand-action p-2 text-brand-white">
                     Explore

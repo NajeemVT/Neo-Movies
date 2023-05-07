@@ -10,7 +10,7 @@ const Header = () => {
           href="/"
         >
           <span className="block text-brand-action md:hidden">NEO</span>
-          <span className="hidden text-brand-action md:block">NEO Movie</span>
+          <span className="hidden text-brand-action md:block">NEO Movies</span>
         </Link>
         <ul className="mr-4 flex items-center justify-end">
           <li className="relative">

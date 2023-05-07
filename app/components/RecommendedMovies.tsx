@@ -10,7 +10,7 @@ const RecommendedMovies = () => {
   useEffect(() => {
     async function fetchMovies() {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=recommended`
+        `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies/search?tag=recommended`
       );
       const movies = (await response.json()).map((p: any) => p.fields);
       setMovies(movies);
@@ -46,7 +46,7 @@ const RecommendedMovies = () => {
                   {movie.title}
                 </h1>
                 <Link
-                  href={`${process.env.NEXT_PUBLIC_HOST_DOMAIN}/movie/${movie.id}`}
+                  href={`${process.env.NEXT_PUBLIC_VERCEL_URL}/movie/${movie.id}`}
                 >
                   <button className="w-full bg-brand-action p-2 text-brand-white">
                     Explore

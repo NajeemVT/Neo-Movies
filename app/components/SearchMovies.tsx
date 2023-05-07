@@ -14,7 +14,7 @@ const SearchMovies = () => {
   useEffect(() => {
     async function fetchMoviesList(searchText: string) {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search/${searchText}`
+        `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies/search/${searchText}`
       );
       const movies = (await response.json()).map((p: any) => p.fields);
       setMovies(movies);

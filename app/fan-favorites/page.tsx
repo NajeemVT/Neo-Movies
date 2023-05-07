@@ -6,7 +6,7 @@ import Link from "next/link";
 
 async function fetchMovies() {
   const response = await fetch(
-    `${process.env.HOST_DOMAIN}/api/movies/search?tag=fan-favorite`
+    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies/search?tag=fan-favorite`
   );
   const results = await response.json();
   const movies = results.length > 0 ? results.map((p: any) => p.fields) : [];
@@ -42,7 +42,7 @@ const FanFavorites = async () => {
                 {movie.title}
               </h1>
               <Link
-                href={`${process.env.NEXT_PUBLIC_HOST_DOMAIN}/movie/${movie.id}`}
+                href={`${process.env.NEXT_PUBLIC_VERCEL_URL}/movie/${movie.id}`}
               >
                 <button className="w-full bg-brand-action p-2 text-brand-white">
                   Explore
