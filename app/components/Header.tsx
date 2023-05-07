@@ -10,20 +10,12 @@ const Header = () => {
           href="/"
         >
           <span className="block text-brand-action md:hidden">NEO</span>
-          <span className="hidden text-brand-action md:block">NEO Movies</span>
+          <span className="hidden text-brand-action md:block">NEO Movie</span>
         </Link>
         <ul className="mr-4 flex items-center justify-end">
           <li className="relative">
             <SearchMovies />
           </li>
-          {/* <li>
-            <Link
-              className="px-4 py-2 font-semibold text-brand-white hover:text-brand-action"
-              href="/all-movies"
-            >
-              All Movies
-            </Link>
-          </li> */}
         </ul>
       </nav>
     </header>

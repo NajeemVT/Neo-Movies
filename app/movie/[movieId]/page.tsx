@@ -42,7 +42,6 @@ const MovieDetails = async ({
             height={1000}
             placeholder="blur"
             blurDataURL="/"
-            unoptimized={true}
             alt=""
             className="aspect-video h-2/5 w-fit md:w-1/2"
           />

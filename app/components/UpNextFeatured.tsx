@@ -4,20 +4,14 @@ import { MovieType } from "@/utils/contentfulClient";
 import { AiFillStar, AiOutlineRight } from "react-icons/ai";
 import Link from "next/link";
 
-const UpNextFeatured = ({ index }: { index: number }) => {
+const UpNextFeatured = ({
+  index,
+  movies,
+}: {
+  index: number;
+  movies: MovieType[];
+}) => {
   const [imageIndexes, setImageIndexes] = useState<number[]>([]);
-  const [movies, setMovies] = useState<MovieType[]>([]);
-
-  useEffect(() => {
-    async function fetchMovies() {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_HOST_DOMAIN}/api/movies/search?tag=featured`
-      );
-      const movies = (await response.json()).map((p: any) => p.fields);
-      setMovies(movies);
-    }
-    fetchMovies();
-  }, [movies]);
 
   useEffect(() => {
     let firstIndex = index;
@@ -43,7 +37,6 @@ const UpNextFeatured = ({ index }: { index: number }) => {
             alt=""
             placeholder="blur"
             blurDataURL="/"
-            unoptimized={true}
             className="aspect-square  rounded-lg"
           />
           <div className=" flex flex-col justify-center space-y-2 text-brand-white">

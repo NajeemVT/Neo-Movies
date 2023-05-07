@@ -39,38 +39,39 @@ const SearchMovies = () => {
           <FaSearch />
         </span>
       </div>
-      <div
-        className={`${
-          showSearchResults ? `block` : `hidden`
-        } absolute z-50 my-2 h-96 w-full  rounded-md bg-brand-primary`}
-      >
-        {movies.map((movie: MovieType) => (
-          <div
-            key={movie.id}
-            className="flex h-1/5 w-full space-x-2 border-b p-2 hover:cursor-pointer hover:bg-brand-secondary md:space-x-5"
-            onMouseDown={() => router.push(`/movie/${movie.id}`)}
-          >
-            <Image
-              src={`https:${movie.posterImage.fields.file?.url}`}
-              width={1000}
-              height={1000}
-              placeholder="blur"
-              blurDataURL="/"
-              unoptimized={true}
-              alt=""
-              className="aspect-square h-full w-1/4"
-            />
-            <div className="h-full w-3/4 text-brand-white">
-              <h1 className="truncate font-semibold md:text-lg">
-                {movie.title}
-              </h1>
-              <p className="w-10/12 text-xs">
-                Stars: {movie.cast.slice(0, 2).join(", ")}
-              </p>
+      {movies.length > 0 && (
+        <div
+          className={`${
+            showSearchResults ? `block` : `hidden`
+          } absolute z-50 my-2 h-96 w-full  rounded-md bg-brand-primary`}
+        >
+          {movies.map((movie: MovieType) => (
+            <div
+              key={movie.id}
+              className="flex h-1/5 w-full space-x-2 border-b p-2 hover:cursor-pointer hover:bg-brand-secondary md:space-x-5"
+              onMouseDown={() => router.push(`/movie/${movie.id}`)}
+            >
+              <Image
+                src={`https:${movie.posterImage.fields.file?.url}`}
+                width={1000}
+                height={1000}
+                placeholder="blur"
+                blurDataURL="/"
+                alt=""
+                className="aspect-square h-full w-1/4"
+              />
+              <div className="h-full w-3/4 text-brand-white">
+                <h1 className="truncate font-semibold md:text-lg">
+                  {movie.title}
+                </h1>
+                <p className="w-10/12 text-xs">
+                  Stars: {movie.cast.slice(0, 2).join(", ")}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

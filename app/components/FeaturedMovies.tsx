@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import UpNextFeatured from "./UpNextFeatured";
 import Link from "next/link";
 import { MovieType } from "@/utils/contentfulClient";
+import Loader from "./Loader";
 
 let slideShowId: NodeJS.Timer;
 const FeaturedMovies = () => {
@@ -37,7 +38,7 @@ const FeaturedMovies = () => {
     slideShowId = setInterval(() => incrementIndex(), 4000);
   }, [incrementIndex]);
 
-  return (
+  return movies.length > 0 ? (
     <div className="flex w-full space-x-2">
       <div className="relative h-[25rem] w-full rounded-t-lg border-x-4 border-y-4 border-brand-primary shadow-2xl md:h-[30rem] md:w-3/4">
         <Image
@@ -47,7 +48,6 @@ const FeaturedMovies = () => {
           alt=""
           placeholder="blur"
           blurDataURL="/"
-          unoptimized={true}
           className="aspect-square h-full w-full rounded-lg"
         />
         <div className="absolute bottom-1/2 z-30 w-full">
@@ -79,7 +79,11 @@ const FeaturedMovies = () => {
           </Link>
         </div>
       </div>
-      <UpNextFeatured index={index} />
+      <UpNextFeatured index={index} movies={movies} />
+    </div>
+  ) : (
+    <div className="flex w-full items-center justify-center">
+      <Loader />
     </div>
   );
 };

@@ -10,22 +10,23 @@ async function fetchMovies() {
 }
 
 const MovieOfTheDay = async () => {
-  const movies = (await fetchMovies()) as MovieType[];
-  const movieOfTheDay = movies[0];
-  return (
-    <div className="h-32 w-full md:h-64">
-      <Image
-        src={`https:${movieOfTheDay.posterImage.fields.file?.url}`}
-        width={1000}
-        height={1000}
-        placeholder="blur"
-        blurDataURL="/"
-        unoptimized={true}
-        alt=""
-        className="aspect-square h-full w-full"
-      />
-    </div>
-  );
+  const movies = ((await fetchMovies()) as MovieType[]) || [];
+  if (movies.length > 0) {
+    const movieOfTheDay = movies[0];
+    return (
+      <div className="h-32 w-full md:h-64">
+        <Image
+          src={`https:${movieOfTheDay.posterImage.fields.file?.url}`}
+          width={1000}
+          height={1000}
+          placeholder="blur"
+          blurDataURL="/"
+          alt=""
+          className="aspect-square h-full w-full"
+        />
+      </div>
+    );
+  }
 };
 
 export default MovieOfTheDay;
