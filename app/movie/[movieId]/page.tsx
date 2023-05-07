@@ -5,11 +5,12 @@ import RecommendedMovies from "@/app/components/RecommendedMovies";
 import Error from "@/app/components/Error";
 
 async function fetchMovie(movieId: string) {
-  const response = await fetch(
-    `${process.env.HOST_DOMAIN}/api/movies/${movieId}`
-  );
-  const movies = (await response.json()).map((p: any) => p.fields);
-  return movies[0];
+  // const response = await fetch(
+  //   `${process.env.HOST_DOMAIN}/api/movies/${movieId}`
+  // );
+  // const movies = (await response.json()).map((p: any) => p.fields);
+  // return movies[0];
+  return {};
 }
 
 const MovieDetails = async ({

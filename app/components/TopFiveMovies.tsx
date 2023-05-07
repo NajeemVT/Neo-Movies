@@ -3,11 +3,12 @@ import { MovieType } from "@/utils/contentfulClient";
 import Link from "next/link";
 
 async function fetchMovies() {
-  const response = await fetch(
-    `${process.env.HOST_DOMAIN}/api/movies/search?tag=top5`
-  );
-  const movies = (await response.json()).map((p: any) => p.fields);
-  return movies;
+  // const response = await fetch(
+  //   `${process.env.HOST_DOMAIN}/api/movies/search?tag=top5`
+  // );
+  // const movies = (await response.json()).map((p: any) => p.fields);
+  // return movies;
+  return [];
 }
 
 const TopFiveMovies = async () => {

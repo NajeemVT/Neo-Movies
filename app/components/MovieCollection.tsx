@@ -4,9 +4,10 @@ import { MovieType } from "@/utils/contentfulClient";
 import Link from "next/link";
 
 async function fetchMovies() {
-  const response = await fetch(`${process.env.HOST_DOMAIN}/api/movies`);
-  const movies = (await response.json()).map((p: any) => p.fields);
-  return movies;
+  // const response = await fetch(`${process.env.HOST_DOMAIN}/api/movies`);
+  // const movies = (await response.json()).map((p: any) => p.fields);
+  // return movies;
+  return [];
 }
 
 const MovieCollection = async () => {
