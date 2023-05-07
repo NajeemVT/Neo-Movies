@@ -6,7 +6,7 @@ import Error from "@/app/components/Error";
 
 async function fetchMovie(movieId: string) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies/${movieId}`
+    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies/${movieId}`
   );
   const movies = (await response.json()).map((p: any) => p.fields);
   return movies[0];

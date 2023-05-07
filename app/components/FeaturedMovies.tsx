@@ -15,7 +15,7 @@ const FeaturedMovies = () => {
   useEffect(() => {
     async function fetchMovies() {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies/search?tag=featured`
+        `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/movies/search?tag=featured`
       );
       const movies = (await response.json()).map((p: any) => p.fields);
       setMovies(movies.slice(0, 3));
@@ -71,7 +71,7 @@ const FeaturedMovies = () => {
             {movies[index]?.title}
           </h2>
           <Link
-            href={`${process.env.NEXT_PUBLIC_VERCEL_URL}/movie/${movies[index]?.id}`}
+            href={`https://${process.env.NEXT_PUBLIC_VERCEL_URL}/movie/${movies[index]?.id}`}
           >
             <button className="rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-white hover:border-amber-400 hover:text-brand-action">
               <AiOutlineRight />
