@@ -7,5 +7,5 @@ export async function GET(req: Request) {
     content_type: "neoMovies",
   });
 
-  return NextResponse.json(entries?.items);
+  return new Response(JSON.stringify(entries?.items), { status: 200 });
 }

@@ -3,7 +3,6 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  distDir: "build",
   images: {
     remotePatterns: [
       {
@@ -13,6 +12,13 @@ const nextConfig = {
         pathname: "**",
       },
     ],
+  },
+  webpack(config) {
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    };
+    return config;
   },
 };
 

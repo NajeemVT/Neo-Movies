@@ -1,12 +1,16 @@
 import Image from "next/image";
-import { MovieType } from "@/utils/contentfulClient";
+import { MovieType, client } from "@/utils/contentfulClient";
 import Link from "next/link";
 
 async function fetchMovies() {
-  const response = await fetch(
-    `${process.env.HOST_DOMAIN}/api/movies/search?tag=top5`
-  );
-  const movies = (await response.json()).map((p: any) => p.fields);
+  const results = (
+    await client.getEntries({
+      content_type: "neoMovies",
+      "fields.tags[in]": "top5",
+      limit: 5,
+    })
+  )?.items;
+  const movies = results.length > 0 ? results.map((p: any) => p.fields) : [];
   return movies;
 }
 

@@ -1,11 +1,16 @@
 import Image from "next/image";
 import { AiOutlineRight } from "react-icons/ai";
-import { MovieType } from "@/utils/contentfulClient";
+import { MovieType, client } from "@/utils/contentfulClient";
 import Link from "next/link";
 
 async function fetchMovies() {
-  const response = await fetch(`${process.env.HOST_DOMAIN}/api/movies`);
-  const movies = (await response.json()).map((p: any) => p.fields);
+  const results = (
+    await client.getEntries({
+      content_type: "neoMovies",
+      limit: 5,
+    })
+  )?.items;
+  const movies = results.length > 0 ? results.map((p: any) => p.fields) : [];
   return movies;
 }
 

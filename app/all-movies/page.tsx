@@ -1,12 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import Error from "../components/Error";
-import { MovieType } from "@/utils/contentfulClient";
+import { MovieType, client } from "@/utils/contentfulClient";
 import Link from "next/link";
 
 async function fetchMovies() {
-  const response = await fetch(`${process.env.HOST_DOMAIN}/api/movies`);
-  const results = await response.json();
+  const results = (
+    await client.getEntries({
+      content_type: "neoMovies",
+    })
+  )?.items;
   const movies = results?.length > 0 ? results?.map((p: any) => p.fields) : [];
   return movies;
 }

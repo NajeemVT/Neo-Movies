@@ -1,15 +1,19 @@
 import Image from "next/image";
 import { AiFillStar } from "react-icons/ai";
-import { MovieType } from "@/utils/contentfulClient";
+import { MovieType, client } from "@/utils/contentfulClient";
 import RecommendedMovies from "@/app/components/RecommendedMovies";
 import Error from "@/app/components/Error";
 
 async function fetchMovie(movieId: string) {
-  const response = await fetch(
-    `${process.env.HOST_DOMAIN}/api/movies/${movieId}`
-  );
-  const movies = (await response.json()).map((p: any) => p.fields);
-  return movies[0];
+  const results = (
+    await client.getEntries({
+      content_type: "neoMovies",
+      "fields.id": movieId,
+      limit: 5,
+    })
+  )?.items;
+  const movies = results?.map((p: any) => p.fields);
+  return movies;
 }
 
 const MovieDetails = async ({
@@ -19,8 +23,9 @@ const MovieDetails = async ({
 }) => {
   if (isNaN(Number(movieId))) return <Error />;
 
-  const movie = (await fetchMovie(movieId)) as MovieType;
-  if (!movie) return <Error />;
+  const movies = (await fetchMovie(movieId)) as MovieType[];
+  if (movies.length === 0) return <Error />;
+  const movie = movies[0];
   return (
     <div className="flex flex-col space-y-10 px-5 py-10 md:space-y-5">
       <div className="flex h-10 flex-col items-start justify-between font-bold text-brand-white md:flex-row md:items-center md:space-x-2">

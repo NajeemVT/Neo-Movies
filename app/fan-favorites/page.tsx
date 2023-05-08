@@ -3,12 +3,16 @@ import Image from "next/image";
 import { MovieType } from "@/utils/contentfulClient";
 import Error from "../components/Error";
 import Link from "next/link";
+import { client } from "@/utils/contentfulClient";
 
 async function fetchMovies() {
-  const response = await fetch(
-    `${process.env.HOST_DOMAIN}/api/movies/search?tag=fan-favorite`
-  );
-  const results = await response.json();
+  const results = (
+    await client.getEntries({
+      content_type: "neoMovies",
+      "fields.tags[in]": "fan-favorite",
+    })
+  )?.items;
+
   const movies = results.length > 0 ? results.map((p: any) => p.fields) : [];
   return movies;
 }
