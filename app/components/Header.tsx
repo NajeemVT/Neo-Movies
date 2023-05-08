@@ -9,8 +9,7 @@ const Header = () => {
           className="flex items-center space-x-4 text-xl font-bold leading-none md:text-2xl"
           href="/"
         >
-          <span className="block text-brand-action md:hidden">NEO</span>
-          <span className="hidden text-brand-action md:block">NEO Movies</span>
+          <span className="text-brand-action">NEO Movies</span>
         </Link>
         <ul className="mr-4 flex items-center justify-end">
           <li className="relative">

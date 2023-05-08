@@ -26,7 +26,7 @@ const RecommendedMovies = () => {
       </div>
 
       {movies.length > 0 && (
-        <div className="flex h-80 w-full justify-between overflow-auto whitespace-nowrap scrollbar-hide">
+        <div className="flex h-80 w-full flex-col justify-between overflow-auto whitespace-nowrap scrollbar-hide md:flex-row">
           {movies &&
             movies.map((movie: MovieType) => (
               <div
@@ -45,7 +45,9 @@ const RecommendedMovies = () => {
                 <h1 className="truncate text-xl font-semibold text-brand-white">
                   {movie.title}
                 </h1>
-                <Link href={`${process.env.HOST_DOMAIN}/movie/${movie.id}`}>
+                <Link
+                  href={`${process.env.NEXT_PUBLIC_HOST_DOMAIN}/movie/${movie.id}`}
+                >
                   <button className="w-full bg-brand-action p-2 text-brand-white">
                     Explore
                   </button>

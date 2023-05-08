@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { MovieType } from "@/utils/contentfulClient";
 import React, { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
 const SearchMovies = () => {
@@ -35,9 +34,6 @@ const SearchMovies = () => {
           onChange={(e) => setSearchText(e.target.value)}
           onFocus={() => setShowSearchResults(true)}
         />
-        <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-brand-primary hover:cursor-pointer">
-          <FaSearch />
-        </span>
       </div>
       {movies.length > 0 && (
         <div
