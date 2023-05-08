@@ -26,7 +26,7 @@ const RecommendedMovies = () => {
       </div>
 
       {movies.length > 0 && (
-        <div className="flex h-80 w-full flex-col justify-between overflow-auto whitespace-nowrap scrollbar-hide md:flex-row">
+        <div className="flex h-full w-full flex-col justify-between space-y-5 overflow-auto whitespace-nowrap scrollbar-hide md:h-80 md:flex-row">
           {movies &&
             movies.map((movie: MovieType) => (
               <div

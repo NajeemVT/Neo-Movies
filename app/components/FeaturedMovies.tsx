@@ -70,7 +70,9 @@ const FeaturedMovies = () => {
           <h2 className="text-center text-xl font-bold text-brand-white md:text-right md:text-4xl">
             {movies[index]?.title}
           </h2>
-          <Link href={`${process.env.HOST_DOMAIN}/movie/${movies[index]?.id}`}>
+          <Link
+            href={`${process.env.NEXT_PUBLIC_HOST_DOMAIN}/movie/${movies[index]?.id}`}
+          >
             <button className="rounded-full border-2 border-inherit bg-inherit  text-4xl font-bold text-white hover:border-amber-400 hover:text-brand-action">
               <AiOutlineRight />
             </button>
